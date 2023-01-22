@@ -10,7 +10,6 @@ html, body {
 
 .container{
     width: 375px;
-    height: 610px;
     margin: 10px  auto;
     background-color: #FFFFFF;
     
@@ -47,7 +46,11 @@ html, body {
 }
 
 .info h2,h3 {
-    margin: 6px;
+    margin: 7px;
+}
+
+.feed {
+    height: 620px;
 }
 
 .user-info {
@@ -91,7 +94,6 @@ html, body {
 }
 .like-count {
     font-weight: 700;
-
 }
 .user-name,.caption-text{
     font-size: 12px;
@@ -100,15 +102,17 @@ html, body {
 .caption {
     display: flex;
     column-gap: 5px;
-    line-height: 0;
+    /* line-height: 0px; */
+    padding-bottom: 10px;
+    
 }
 
 .caption p {
    margin: 0;
-}
+} 
 
 .spacing {
     background-color:#F5F5F5;
-    height: 20px;
+    height: 30px;
     margin: 15px auto 0 auto;
 }

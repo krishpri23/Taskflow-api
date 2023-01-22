@@ -17,7 +17,7 @@ function render() {
                             </div>
 
                         </div>
-                        <img class="post-img" src="${post.post}" alt="post pic" srcset="">
+                        <img class="post-img" src="${post.post}" alt="post pic">
                         <div class="post-footer">
                             <div class="icons">
                                 <img class="icon-img" src="./images/icon-heart.png" alt="like">
@@ -30,8 +30,11 @@ function render() {
                                 <p class="caption-text"> ${post.comment} </p>
                             </div>
                         </div>
-                    </div>
-           <div class="spacing"></div> 
+                      
+        </div>
+        <div class="spacing"></div>
+
+       
 `
     })
 
