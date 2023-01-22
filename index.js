@@ -32,8 +32,9 @@ function render() {
                         </div>
                       
         </div>
-        <div class="spacing"></div>
-
+        <div class="spacing">
+           <br>
+        </div>
        
 `
     })

@@ -104,6 +104,7 @@ html, body {
     column-gap: 5px;
     /* line-height: 0px; */
     padding-bottom: 10px;
+   
     
 }
 
@@ -112,7 +113,6 @@ html, body {
 } 
 
 .spacing {
-    background-color:#F5F5F5;
-    height: 30px;
-    margin: 15px auto 0 auto;
+    background-color:blue;
+    margin-top: 0;
 }
