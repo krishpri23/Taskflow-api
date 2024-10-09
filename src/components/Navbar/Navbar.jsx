@@ -5,6 +5,7 @@ const Navbar = () => {
   return (
     <nav>
       <div className="nav-left flex-div">
+        <FaAlignJustify className="menu" />
         <FaYoutube className="logo" />
       </div>
       <div className="nav-middle flex-div">
