@@ -15,7 +15,7 @@ const getUsers = asyncHandler(async (req, res) => {
   res.status(201).json(users);
 });
 
-// @desc create user || Register
+// @desc create user
 // @route POST /users
 // @access private
 const createUser = asyncHandler(async (req, res) => {
