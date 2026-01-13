@@ -51,6 +51,71 @@ const login = async (req, res) => {
   // Send accessToken containing username and roles
   res.json({ accessToken });
 };
+// @desc Register a new user
+// @route POST /auth/register
+// @access Public
+const register = asyncHandler(async (req, res) => {
+  const { username, password, roles } = req.body;
+
+  // 1. Validate input
+  if (!username || !password) {
+    return res.status(400).json({ message: "Username and password are required" });
+  }
+
+  // 2. Check for duplicate username
+  const duplicate = await User.findOne({ username }).lean().exec();
+  if (duplicate) {
+    return res.status(409).json({ message: "Username already exists" });
+  }
+
+  // 3. Hash password
+  const hashedPwd = await bcrypt.hash(password, 10);
+
+  // 4. Create and store the new user
+  const userObject = {
+    username,
+    password: hashedPwd,
+    roles: roles?.length ? roles : ["User"],
+    active: true,
+  };
+
+  const user = await User.create(userObject);
+
+  if (user) {
+    // 5. Generate tokens
+    const accessToken = jwt.sign(
+      {
+        UserInfo: {
+          username: user.username,
+          roles: user.roles,
+        },
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "15m" }
+    );
+
+    const refreshToken = jwt.sign(
+      { username: user.username },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    // 6. Set secure cookie for refresh token (adjust for local dev)
+    res.cookie("jwt", refreshToken, {
+      httpOnly: true,
+      secure: false,        // ⚠️ change to true in production
+      sameSite: "None",      // ⚠️ change to "None" with secure: true in prod
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    // 7. Send accessToken in response
+    res.status(201).json({ accessToken });
+  } else {
+    res.status(400).json({ message: "Invalid user data received" });
+  }
+});
+
+
 
 // access token is expired so we send refresh token to generate a new access token
 const refresh = asyncHandler(async (req, res) => {
@@ -107,4 +172,5 @@ module.exports = {
   login,
   refresh,
   logout,
+  register
 };
